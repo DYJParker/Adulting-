@@ -56,9 +56,30 @@ Persona Worksheet
 
 ### Alice
 - Bio & Demographic Details
+
     Late 20s, lives with roommate, makes decent money but still has to be cost-conscious.
 - Behaviors & Habits
+
     Tends to order groceries online, mostly loses fruit/veg and leftovers to being too old.
-- Stories, Scenarios & Frustrations
 - Needs/Problems/Goals
 
+    Wants to waste less food, save money
+
+### Bob
+- Bio & Demographic Details
+
+    Early 30s, lives alone, less worried about money.
+- Behaviors & Habits
+
+    Has too many balls in the air, tends to lose track of things.
+- Needs/Problems/Goals
+
+    Wants a better way to track responsibilities, being more aware of priority and how long something will take
+
+Problem Statetements
+=====
+Alice needs a way to minimize food waste with minimal overhead, because she's tired of losing money and generally generating waste, but doesn't want to waste (brain-)time either.
+- We believe that by using advanced digitla functionality (e.g. OCR, scraping of digital receipts, providing best-guesses for expiration timeframes) we will minimize overhead while enabling Alice to minimize waste.
+
+Bob needs a more life-aware way to track his personal obligations, because he's tired of clogging up e.g. his calendar and still not having the information he needs.
+- We believe that by providing a user-adjustable, context-aware way to track these obligations, we will lessen the need for Bob to spend brain-time (re)evaluating what he needs to do *now*.
