@@ -50,3 +50,15 @@ Streamline input, minimize intrusiveness of output, notifications should be opt-
 
 ##### Were there any new topics or open questions to research further?
 How specialized do I want to be? I steered the conversation toward food, but that still got an underwhelming response, and people seem to want something a lot more flexible.
+
+Persona Worksheet
+=====
+
+### Alice
+- Bio & Demographic Details
+    Late 20s, lives with roommate, makes decent money but still has to be cost-conscious.
+- Behaviors & Habits
+    Tends to order groceries online, mostly loses fruit/veg and leftovers to being too old.
+- Stories, Scenarios & Frustrations
+- Needs/Problems/Goals
+
