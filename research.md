@@ -35,3 +35,18 @@ Research Plan
     1. How much time/effort is spent on meeting these obligations?
     1. How much time/effort/money is spent or lost because of missed obligations?
     1. How valuable would it be to have informations/reminders about these obligations presented to you on a timely basis? Active presentation or available when you want it?
+
+Research Highlights
+=====
+
+##### Observations
+See [Research Results](https://docs.google.com/spreadsheets/d/1_B4CzoBiUgto04HnEUpAcpCNTTkiUooGh0xoFi5wP5k/edit?usp=sharing) for main body of raw feedback and additional notes from following up.
+
+##### Insights
+Seems people have either zero or significant interest in food tracking, marginal interest in bills specifically, but are potentially looking for a better, semi-general-purpose todo list. They are generally disinterested in active notification, particularly for food loss.
+
+##### Design Recommendations
+Streamline input, minimize intrusiveness of output, notifications should be opt-in.
+
+##### Were there any new topics or open questions to research further?
+How specialized do I want to be? I steered the conversation toward food, but that still got an underwhelming response, and people seem to want something a lot more flexible.
