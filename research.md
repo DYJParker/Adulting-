@@ -112,17 +112,19 @@ User Stories
         - As a user, I can have looking up the information and entering it expedited.
         - As a user, I can have a best-guess for a new item automatically suggested.
     - As a grocery user, I can pull up a list of groceries I have finished, which I might need to re-order.
+        - As a user, I can have items automatically added when they're marked "completed" on the to-be-consumed list.
         - As a user, I can add items manually
         - As a user, I can remove items I don't want to track
         - As a user, I can remove items from this list by moving them back to the to-be-consumed list.
         - As a user, I can have items automatically removed from this list if the item is entered on the to-be-consumed list.
         - As a user, I can blacklist items so that they will never be moved to this list.
 - As a GI user, I can track non-grocery tasks.
-    - As a GI user, I can add recurrance to my tasks.
-        - As a GI user, I can set time- or count-limits to my recurrances.
     - As a GI user, I can add a due-date to my tasks.
         - As a GI user, I can sort by due-date.
         - As a GI user, I can view my tasks in a calendar view.
+        - As a GI user, I can have the app remind me via notifications
+    - As a GI user, I can add recurrance to my tasks.
+        - As a GI user, I can set time- or count-limits to my recurrances.
     - As a GI user, I can add a relative priority to my tasks.
         - As a GI user, I can sort by priority
     - As a GI user, I can add a duration to my tasks.
