@@ -98,3 +98,32 @@ Advanced sharing/delegation |  | X | X
 Price tracking |  |  | X
 Predicts when one will run out |  |  | X
 
+User Stories
+=====
+- As a grocery user, I can track expirable groceries.
+    - As a grocery user, I can add groceries to my list
+        - As a user, I can manually enter identifying information, optionally having it available for reuse.
+        - As a user, I can take a photo to use as an icon if I don't want to type out a description.
+        - As a user, I can scan UPCs to auto-add items to the list.
+        - As a user, I can scrape an emailed receipt to auto-add everything.
+        - As a user, I can OCR a physical receipt to auto-add everything.
+    - As a grocery user, I can track a deadline for when I should consume a grocery item.
+        - As a user, I can manually enter how long I expect it to last, which will be suggested next time the same item is re-added.
+        - As a user, I can have looking up the information and entering it expedited.
+        - As a user, I can have a best-guess for a new item automatically suggested.
+    - As a grocery user, I can pull up a list of groceries I have finished, which I might need to re-order.
+        - As a user, I can add items manually
+        - As a user, I can remove items I don't want to track
+        - As a user, I can remove items from this list by moving them back to the to-be-consumed list.
+        - As a user, I can have items automatically removed from this list if the item is entered on the to-be-consumed list.
+        - As a user, I can blacklist items so that they will never be moved to this list.
+- As a GI user, I can track non-grocery tasks.
+    - As a GI user, I can add a due-date to my tasks.
+        - As a GI user, I can sort by due-date.
+        - As a GI user, I can view my tasks in a calendar view.
+    - As a GI user, I can add a relative priority to my tasks.
+        - As a GI user, I can sort by priority
+    - As a GI user, I can add a duration to my tasks.
+        - As a GI user, I can sort by duration-start.
+    - As a GI user, I can view my tasks in a way that weights each of the above three optional data-points.
+- As a user, I can sync my list(s) to the cloud.
