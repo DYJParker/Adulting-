@@ -83,3 +83,18 @@ Alice needs a way to minimize food waste with minimal overhead, because she's ti
 
 Bob needs a more life-aware way to track his personal obligations, because he's tired of clogging up e.g. his calendar and still not having the information he needs.
 - We believe that by providing a user-adjustable, context-aware way to track these obligations, we will lessen the need for Bob to spend brain-time (re)evaluating what he needs to do *now*.
+
+Competitive Analysis
+=====
+Feature | this | Todoist | Grocery Tracker
+---|---|---|---
+Cloud synching | X | X | ?
+Natural Language interface |  | X | 
+Subtasking |  | X | X
+Automated/expedited grocery tracking | X |  | X
+Grocery expiration data | - |  | 
+Prioritization | - | X | 
+Advanced sharing/delegation |  | X | X
+Price tracking |  |  | X
+Predicts when one will run out |  |  | X
+
