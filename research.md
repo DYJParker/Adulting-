@@ -118,6 +118,8 @@ User Stories
         - As a user, I can have items automatically removed from this list if the item is entered on the to-be-consumed list.
         - As a user, I can blacklist items so that they will never be moved to this list.
 - As a GI user, I can track non-grocery tasks.
+    - As a GI user, I can add recurrance to my tasks.
+        - As a GI user, I can set time- or count-limits to my recurrances.
     - As a GI user, I can add a due-date to my tasks.
         - As a GI user, I can sort by due-date.
         - As a GI user, I can view my tasks in a calendar view.
