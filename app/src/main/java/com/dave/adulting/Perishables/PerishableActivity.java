@@ -1,13 +1,17 @@
-package com.dave.adulting;
+package com.dave.adulting.Perishables;
 
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.dave.adulting.CommonInfrastructure.InfrastructureBaseActivity;
+import com.dave.adulting.R;
+
 public class PerishableActivity extends InfrastructureBaseActivity {
+    private RecyclerView.Adapter mAdapter;
     private static final String TAG = "PerishableActivity";
 
     @Override
@@ -26,5 +30,7 @@ public class PerishableActivity extends InfrastructureBaseActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
     }
 }

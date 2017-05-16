@@ -1,4 +1,4 @@
-package com.dave.adulting;
+package com.dave.adulting.CommonInfrastructure;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.dave.adulting.*;
+import com.dave.adulting.R;
 import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.BuildConfig;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +27,7 @@ import java.util.Arrays;
  * Created by Dave - Work on 5/16/2017.
  */
 
-abstract class InfrastructureBaseActivity extends AppCompatActivity {
+public abstract class InfrastructureBaseActivity extends AppCompatActivity {
     protected FirebaseAuth mAuth;
     protected static final int FB_SIGN_IN = 1000;
     protected Intent mFBSignin;
@@ -73,7 +75,7 @@ abstract class InfrastructureBaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_common, menu);
+        getMenuInflater().inflate(com.dave.adulting.R.menu.menu_common, menu);
         return true;
     }
 
