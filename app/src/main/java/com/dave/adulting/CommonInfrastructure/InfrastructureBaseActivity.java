@@ -20,6 +20,7 @@ import com.firebase.ui.auth.BuildConfig;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
@@ -55,7 +56,10 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == FB_SIGN_IN) {
-            if (resultCode == ResultCodes.OK) onSpecificCreate();
+            if (resultCode == ResultCodes.OK){
+                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                onSpecificCreate();
+            }
             else signInError(IdpResponse.fromResultIntent(data));
         }
     }
