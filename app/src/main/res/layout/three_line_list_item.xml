@@ -11,8 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/listTitle"
@@ -41,12 +41,14 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             tools:text="a;lskdjflaskdjf;alskjdf;alksjdf;laksjdf;lkajsd;flkajsd;flkjas;dlkfj;alskdjf"/>
     </LinearLayout>
+
     <ImageButton
+        android:id="@+id/check"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:src="@drawable/ic_check_black_24dp"
+        android:layout_gravity="center_vertical"
         android:scaleType="center"
-        android:tint="@android:color/secondary_text_light"
-        android:layout_gravity="center_vertical"/>
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="@android:color/secondary_text_light"/>
 </LinearLayout>

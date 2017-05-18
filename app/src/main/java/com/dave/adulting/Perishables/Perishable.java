@@ -5,7 +5,7 @@ package com.dave.adulting.Perishables;
  */
 
 public class Perishable {
-    private String mTitle;
+    private String mTitle, mID;
     private long mExpires, mAdded;
 
     public Perishable() {

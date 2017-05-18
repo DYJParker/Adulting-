@@ -13,6 +13,7 @@ import com.dave.adulting.R;
 import com.firebase.ui.database.FirebaseIndexRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -52,6 +53,12 @@ public class PerishableActivity extends InfrastructureBaseActivity implements Pe
                 VH.setTitle(model.getTitle());
                 VH.setLine1(model.getExpires());
                 VH.setLine2(model.getAdded());
+                VH.setAdapter(this);
+            }
+
+            @Override
+            protected Perishable parseSnapshot(DataSnapshot snapshot) {
+                return super.parseSnapshot(snapshot);
             }
         };
         rv.setAdapter(mAdapter);

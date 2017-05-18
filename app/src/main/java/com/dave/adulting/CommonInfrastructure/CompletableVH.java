@@ -11,7 +11,7 @@ import com.dave.adulting.R;
  */
 
 public abstract class CompletableVH extends RecyclerView.ViewHolder implements /*View.OnLongClickListener,*/ View.OnClickListener {
-    ImageButton mCheck;
+    protected ImageButton mCheck;
 
     public CompletableVH(View itemView) {
         super(itemView);
