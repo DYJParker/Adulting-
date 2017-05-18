@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.dave.adulting.*;
+import com.dave.adulting.Perishables.PerishableActivity;
 import com.dave.adulting.R;
 import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.BuildConfig;
@@ -104,6 +105,14 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
                             finish();
                         }
                     });
+            return true;
+        }
+        else if (id == R.id.actionPerishable){
+            startActivity(new Intent(this,PerishableActivity.class));
+            return true;
+        }
+        else if (id == R.id.actionTasks){
+            startActivity(new Intent(this,TasksActivity.class));
             return true;
         }
 
