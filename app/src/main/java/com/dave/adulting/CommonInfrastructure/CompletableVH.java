@@ -16,7 +16,7 @@ public abstract class CompletableVH extends RecyclerView.ViewHolder implements /
     public CompletableVH(View itemView) {
         super(itemView);
 
-        mCheck = itemView.findViewById(R.id.check);
+        mCheck = (ImageButton)itemView.findViewById(R.id.check);
         mCheck.setOnClickListener(this);
         //itemView.setOnLongClickListener(this);
     }
