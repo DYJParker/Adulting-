@@ -1,11 +1,16 @@
 package com.dave.adulting.Perishables;
 
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.dave.adulting.CommonInfrastructure.InfrastructureBaseActivity;
@@ -29,6 +34,10 @@ public class PerishableActivity extends InfrastructureBaseActivity implements Pe
         Log.d(TAG, "onSpecificCreate happened!");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        MenuItem menuItem;
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -74,5 +83,12 @@ public class PerishableActivity extends InfrastructureBaseActivity implements Pe
     @Override
     public void addPerishable(Perishable per) {
         mRef.push().setValue(per);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean store = super.onCreateOptionsMenu(menu);
+        menuHighlighter(R.id.actionPerishable,menu);
+        return store;
     }
 }

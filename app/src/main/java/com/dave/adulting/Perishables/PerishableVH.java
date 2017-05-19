@@ -1,9 +1,12 @@
 package com.dave.adulting.Perishables;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,16 +18,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dave - Work on 5/16/2017.
  */
 
 class PerishableVH extends CompletableVH {
+    private static final String TAG = "PerishableVH";
     TextView mTitle, mLine1, mLine2;
-    DateFormat mDF;
-    FirebaseRecyclerAdapter mAdapter;
 
     public PerishableVH(View itemView) {
         super(itemView);
@@ -41,14 +46,11 @@ class PerishableVH extends CompletableVH {
 
     public void setLine1(long expires) {
         mLine1.setText(mDF.format(new Date(expires)));
+        setCriticalityColor(expires, mTitle, mLine1, mLine2);
     }
 
     public void setLine2(long added) {
         mLine2.setText(mDF.format(new Date(added)));
-    }
-
-    public void setAdapter(FirebaseRecyclerAdapter adapter) {
-        mAdapter = adapter;
     }
 
     @Override

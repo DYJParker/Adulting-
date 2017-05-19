@@ -2,18 +2,22 @@ package com.dave.adulting.CommonInfrastructure;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.dave.adulting.*;
+import com.dave.adulting.Perishables.PerishableActivity;
 import com.dave.adulting.R;
 import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.BuildConfig;
@@ -106,7 +110,26 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
                     });
             return true;
         }
+        else if (id == R.id.actionPerishable){
+            startActivity(new Intent(this,PerishableActivity.class));
+            return true;
+        }
+        //else if (id == R.id.actionTasks){
+        //    startActivity(new Intent(this,TasksActivity.class));
+        //    return true;
+        //}
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void menuHighlighter(int id, Menu menu){
+        MenuItem menuItem;
+        if (null!=(menuItem = menu.findItem(id))){
+            Drawable normalDrawable = menuItem.getIcon();
+            Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);
+            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(this,R.color.colorAccent));
+            menuItem.setIcon(wrapDrawable);
+            menuItem.setEnabled(false);
+        }
     }
 }

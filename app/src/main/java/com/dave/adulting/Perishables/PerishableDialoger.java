@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.dave.adulting.CommonInfrastructure.CompletableVH;
+import com.dave.adulting.CommonInfrastructure.InfrastructureBaseActivity;
 import com.dave.adulting.R;
 import com.google.firebase.database.DatabaseReference;
 
@@ -39,12 +41,13 @@ class PerishableDialoger {
                     description.setError("Required");
                 } else {
                     Calendar cal = GregorianCalendar.getInstance();
-                    long added = cal.getTime().getTime();
+                    long added = CompletableVH.setMidnight(cal.getTimeInMillis());
+                    cal.setTimeInMillis(added);
                     cal.add(Calendar.DAY_OF_YEAR,
                             Integer.parseInt(estimate.getText().toString()));
                     listener.addPerishable(new Perishable(
                             description.getText().toString(),
-                            cal.getTime().getTime(),
+                            cal.getTimeInMillis()+1,
                             added
                     ));
                     dialog.dismiss();
