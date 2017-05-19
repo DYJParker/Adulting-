@@ -115,10 +115,10 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
             startActivity(new Intent(this,PerishableActivity.class));
             return true;
         }
-        //else if (id == R.id.actionTasks){
-        //    startActivity(new Intent(this,TasksActivity.class));
-        //    return true;
-        //}
+        else if (id == R.id.actionTasks){
+            startActivity(new Intent(this,TasksActivity.class));
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

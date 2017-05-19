@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -60,5 +61,12 @@ public class TasksActivity extends InfrastructureBaseActivity implements TaskDia
     @Override
     public void addTask(Task task) {
         mRef.push().setValue(task);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean store = super.onCreateOptionsMenu(menu);
+        menuHighlighter(R.id.actionTasks,menu);
+        return store;
     }
 }
