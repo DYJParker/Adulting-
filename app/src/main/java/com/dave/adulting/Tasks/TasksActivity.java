@@ -64,9 +64,8 @@ public class TasksActivity extends InfrastructureBaseActivity implements TaskDia
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        boolean store = super.onCreateOptionsMenu(menu);
-        menuHighlighter(R.id.actionTasks,menu);
-        return store;
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        prepareOptionsMenu(menu, R.id.actionTasks);
+        return super.onPrepareOptionsMenu(menu);
     }
 }
