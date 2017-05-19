@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.dave.adulting.*;
 import com.dave.adulting.Perishables.PerishableActivity;
 import com.dave.adulting.R;
+import com.dave.adulting.Tasks.TasksActivity;
 import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.BuildConfig;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -114,10 +115,10 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
             startActivity(new Intent(this,PerishableActivity.class));
             return true;
         }
-        //else if (id == R.id.actionTasks){
-        //    startActivity(new Intent(this,TasksActivity.class));
-        //    return true;
-        //}
+        else if (id == R.id.actionTasks){
+            startActivity(new Intent(this,TasksActivity.class));
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

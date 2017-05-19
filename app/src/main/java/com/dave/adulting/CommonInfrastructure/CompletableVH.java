@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.dave.adulting.Perishables.Perishable;
 import com.dave.adulting.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
