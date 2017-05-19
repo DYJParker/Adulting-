@@ -3,6 +3,16 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.dave.adulting.Perishables.PerishableActivity">
     <item
+        android:id="@+id/actionPerishable"
+        android:icon="@drawable/ic_delete_forever_black_24dp"
+        android:title="Perishables"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/actionTasks"
+        android:icon="@drawable/ic_playlist_add_check_black_24dp"
+        app:showAsAction="always"
+        android:title="Tasks"/>
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
