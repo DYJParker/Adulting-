@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.dave.adulting.*;
 import com.dave.adulting.Perishables.PerishableActivity;
 import com.dave.adulting.R;
+import com.dave.adulting.Tasks.TasksActivity;
 import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.BuildConfig;
 import com.google.android.gms.tasks.OnCompleteListener;
