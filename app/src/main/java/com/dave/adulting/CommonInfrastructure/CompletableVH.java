@@ -15,8 +15,8 @@ import java.text.DateFormat;
 
 public abstract class CompletableVH extends RecyclerView.ViewHolder implements /*View.OnLongClickListener,*/ View.OnClickListener {
     ImageButton mCheck;
-    DateFormat mDF;
-    FirebaseRecyclerAdapter mAdapter;
+    protected DateFormat mDF;
+    protected FirebaseRecyclerAdapter mAdapter;
 
     public CompletableVH(View itemView) {
         super(itemView);
