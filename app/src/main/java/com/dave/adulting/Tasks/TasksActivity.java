@@ -56,6 +56,7 @@ public class TasksActivity extends InfrastructureBaseActivity implements TaskDia
             }
         };
         rv.setAdapter(mAdapter);
+        super.onSpecificCreate();
     }
 
     @Override

@@ -1,30 +1,29 @@
 package com.dave.adulting.CommonInfrastructure;
 
-import android.content.Context;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.transition.TransitionSet;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-import com.dave.adulting.*;
 import com.dave.adulting.Perishables.PerishableActivity;
 import com.dave.adulting.R;
 import com.dave.adulting.Tasks.TasksActivity;
-import com.firebase.ui.auth.*;
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.BuildConfig;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.ResultCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +40,7 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
     protected FirebaseAuth mAuth;
     protected static final int FB_SIGN_IN = 1000;
     protected Intent mFBSignin;
+    protected ActivityOptions mOptions;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,7 +82,13 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
         startActivityForResult(mFBSignin, FB_SIGN_IN);
     }
 
-    abstract protected void onSpecificCreate();
+    protected void onSpecificCreate(){
+        TransitionSet transition = new TransitionSet();
+        getWindow().setSharedElementEnterTransition(transition);
+        getWindow().setSharedElementReturnTransition(transition);
+        Pair<View, String> pair = Pair.create(findViewById(R.id.toolbar),getString(R.string.toolbar_transition_name));
+        mOptions = ActivityOptions.makeSceneTransitionAnimation(this,pair);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -107,14 +113,20 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
                     });
             return true;
         } else if (id == R.id.actionPerishable) {
-            startActivity(new Intent(this, PerishableActivity.class));
+            startActivity(new Intent(this, PerishableActivity.class)/*,mOptions.toBundle()*/);
             return true;
         } else if (id == R.id.actionTasks) {
-            startActivity(new Intent(this, TasksActivity.class));
+            startActivity(new Intent(this, TasksActivity.class)/*,mOptions.toBundle()*/);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(com.dave.adulting.R.menu.menu_common, menu);
+        return true;
     }
 
     protected void prepareOptionsMenu(Menu menu, int id){

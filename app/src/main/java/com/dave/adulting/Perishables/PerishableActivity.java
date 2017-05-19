@@ -61,6 +61,7 @@ public class PerishableActivity extends InfrastructureBaseActivity implements Pe
             }
         };
         rv.setAdapter(mAdapter);
+        super.onSpecificCreate();
     }
 
     @Override
