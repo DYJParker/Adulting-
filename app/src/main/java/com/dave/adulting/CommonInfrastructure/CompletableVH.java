@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.dave.adulting.R;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
+import java.text.DateFormat;
 
 /**
  * Created by Dave - Work on 5/18/2017.
@@ -12,13 +15,20 @@ import com.dave.adulting.R;
 
 public abstract class CompletableVH extends RecyclerView.ViewHolder implements /*View.OnLongClickListener,*/ View.OnClickListener {
     ImageButton mCheck;
+    DateFormat mDF;
+    FirebaseRecyclerAdapter mAdapter;
 
     public CompletableVH(View itemView) {
         super(itemView);
 
+        mDF = DateFormat.getDateInstance(DateFormat.SHORT);
         mCheck = (ImageButton)itemView.findViewById(R.id.check);
         mCheck.setOnClickListener(this);
         //itemView.setOnLongClickListener(this);
+    }
+
+    public void setAdapter(FirebaseRecyclerAdapter adapter) {
+        mAdapter = adapter;
     }
 
 
