@@ -1,27 +1,25 @@
 package com.dave.adulting.CommonInfrastructure;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.dave.adulting.*;
 import com.dave.adulting.Perishables.PerishableActivity;
 import com.dave.adulting.R;
 import com.dave.adulting.Tasks.TasksActivity;
-import com.firebase.ui.auth.*;
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.BuildConfig;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.ResultCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +35,7 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
     protected FirebaseAuth mAuth;
     protected static final int FB_SIGN_IN = 1000;
     protected Intent mFBSignin;
+    private static final String TAG = "InfrastructureBaseActiv";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +82,8 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        Log.d(TAG, "onCreateOptionsMenu: " + menu);
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(com.dave.adulting.R.menu.menu_common, menu);
         return true;
@@ -123,14 +124,17 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void menuHighlighter(int id, Menu menu){
+    protected void prepareMenu(Menu menu, int id){
+        Log.d(TAG, "prepareMenu: " + getResources().getResourceEntryName(id));
         MenuItem menuItem;
-        if (null!=(menuItem = menu.findItem(id))){
-            Drawable normalDrawable = menuItem.getIcon();
-            Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);
-            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(this,R.color.colorAccent));
-            menuItem.setIcon(wrapDrawable);
-            menuItem.setEnabled(false);
+        for (int i = 0; i < menu.size(); i++) {
+            if ((menuItem = menu.getItem(i)).getIcon()!=null){
+                menuItem.getIcon().setTint(Color.BLACK);
+            }
         }
+        menuItem = menu.findItem(id);
+        menuItem.getIcon().setTint(ContextCompat.getColor(this,R.color.colorAccent));
+        menuItem.setEnabled(false);
+        invalidateOptionsMenu();
     }
 }
