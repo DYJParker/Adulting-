@@ -61,7 +61,7 @@ public class PerishableActivity extends InfrastructureBaseActivity implements Pe
             }
         };
         rv.setAdapter(mAdapter);
-        super.onSpecificCreate();
+        //super.onSpecificCreate();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class PerishableActivity extends InfrastructureBaseActivity implements Pe
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        prepareOptionsMenu(menu, R.id.actionPerishable);
+        prepareMenu(menu, R.id.actionPerishable);
         return super.onPrepareOptionsMenu(menu);
     }
 }

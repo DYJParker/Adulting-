@@ -91,6 +91,13 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(com.dave.adulting.R.menu.menu_common, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -122,30 +129,17 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(com.dave.adulting.R.menu.menu_common, menu);
-        return true;
-    }
-
-    protected void prepareOptionsMenu(Menu menu, int id){
+    protected void prepareMenu(Menu menu, int id){
+        Log.d(TAG, "prepareMenu: " + getResources().getResourceEntryName(id));
         MenuItem menuItem;
-        //menu.findItem(id).getIcon().setTint(ContextCompat.getColor(this,R.color.colorAccent));
-        Log.d(TAG, "menuHighlighter: target = " + getResources().getResourceEntryName(id));
         for (int i = 0; i < menu.size(); i++) {
-            if ((menuItem = menu.getItem(i)).getIcon() != null) {
-                if (menuItem.getItemId() == id) {
-                    int color = ContextCompat.getColor(this, R.color.colorAccent);
-                    Log.d(TAG, "menuHighlighter: " + getResources().getResourceEntryName(menuItem.getItemId()) + " got set to " + Color.blue(color));
-                    menuItem.getIcon().setTint(color);
-                    menuItem.setEnabled(false);
-
-                } else {
-                    menuItem.getIcon().setTint(Color.BLACK);
-                    Log.d(TAG, "menuHighlighter: " + getResources().getResourceEntryName(menuItem.getItemId())+ " did not");
-                }
+            if ((menuItem = menu.getItem(i)).getIcon()!=null){
+                menuItem.getIcon().setTint(Color.BLACK);
             }
         }
+        menuItem = menu.findItem(id);
+        menuItem.getIcon().setTint(ContextCompat.getColor(this,R.color.colorAccent));
+        menuItem.setEnabled(false);
+        invalidateOptionsMenu();
     }
 }
