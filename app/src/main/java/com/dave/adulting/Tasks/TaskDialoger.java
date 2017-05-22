@@ -24,7 +24,7 @@ import static java.util.Calendar.YEAR;
 
 public class TaskDialoger {
     public static void addDialog(final Context ctx, final TaskAddListener listener) {
-        View diag = ((LayoutInflater) ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dialog_add_task, null);
+        View diag = ((LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dialog_add_task, null);
         final EditText description = (EditText) diag.findViewById(R.id.taskDiaDescription);
         final EditText estimate = (EditText) diag.findViewById(R.id.taskDiaDueDate);
         final DuePackage due = new DuePackage();

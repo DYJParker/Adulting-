@@ -9,6 +9,11 @@
         android:title="Perishables"
         app:showAsAction="always"/>
     <item
+        android:id="@+id/actionToBuy"
+        android:icon="@drawable/ic_local_grocery_store_black_24dp"
+        app:showAsAction="always"
+        android:title="To Buy List"/>
+    <item
         android:id="@+id/actionTasks"
         android:icon="@drawable/ic_playlist_add_check_black_24dp"
         app:showAsAction="always"

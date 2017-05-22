@@ -1,27 +1,17 @@
 package com.dave.adulting.Perishables;
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.os.Build;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dave.adulting.CommonInfrastructure.CompletableVH;
 import com.dave.adulting.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.auth.FirebaseAuth;
+import com.dave.adulting.ToBuy.ToBuyActivity;
+import com.dave.adulting.ToBuy.ToBuyItem;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dave - Work on 5/16/2017.
@@ -54,6 +44,22 @@ class PerishableVH extends CompletableVH {
 
     @Override
     public void onClick(View v) {
+        final Perishable temp = ((Perishable) mAdapter.getItem(getAdapterPosition()));
+        final DatabaseReference shopping = mAdapter.getRef(getAdapterPosition())
+                .getParent().getParent().child(ToBuyActivity.SHOPPING_LIST).push();
+        shopping.setValue(new ToBuyItem(
+                temp.getTitle(),
+                GregorianCalendar.getInstance().getTimeInMillis())
+        );
+
+        Snackbar.make(v, "Moved " + temp.getTitle() + " to the shopping list", Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        shopping.getParent().getParent().child(PerishableActivity.PERISHABLES).push().setValue(temp);
+                        shopping.removeValue();
+                    }
+                }).show();
         mAdapter.getRef(getAdapterPosition()).removeValue();
     }
 }

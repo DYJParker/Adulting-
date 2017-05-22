@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public abstract class CompletableVH extends RecyclerView.ViewHolder implements /*View.OnLongClickListener,*/ View.OnClickListener {
-    ImageButton mCheck;
+    protected ImageButton mCheck;
     protected DateFormat mDF;
     protected FirebaseRecyclerAdapter mAdapter;
 
@@ -28,8 +28,10 @@ public abstract class CompletableVH extends RecyclerView.ViewHolder implements /
         super(itemView);
 
         mDF = DateFormat.getDateInstance(DateFormat.SHORT);
-        mCheck = (ImageButton)itemView.findViewById(R.id.check);
-        mCheck.setOnClickListener(this);
+        if(itemView.findViewById(R.id.check)!=null) {
+            mCheck = (ImageButton) itemView.findViewById(R.id.check);
+            mCheck.setOnClickListener(this);
+        }
         //itemView.setOnLongClickListener(this);
     }
 

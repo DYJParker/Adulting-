@@ -2,14 +2,12 @@ package com.dave.adulting.CommonInfrastructure;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuItemImpl;
 import android.transition.AutoTransition;
 import android.transition.TransitionSet;
 import android.util.Log;
@@ -22,6 +20,7 @@ import android.widget.Toast;
 import com.dave.adulting.Perishables.PerishableActivity;
 import com.dave.adulting.R;
 import com.dave.adulting.Tasks.TasksActivity;
+import com.dave.adulting.ToBuy.ToBuyActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.BuildConfig;
 import com.firebase.ui.auth.ErrorCodes;
@@ -128,12 +127,14 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
                         }
                     });
             return true;
-        } else if (id == R.id.actionPerishable || id == R.id.actionTasks) {
+        } else if (id == R.id.actionPerishable || id == R.id.actionTasks || id == R.id.actionToBuy) {
             Intent inte;
             if (id == R.id.actionTasks) {
                 inte = new Intent(this,TasksActivity.class);
-            } else {
+            } else if(id == R.id.actionPerishable){
                 inte = new Intent(this,PerishableActivity.class);
+            } else {
+                inte = new Intent(this,ToBuyActivity.class);
             }
             inte.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(inte/*, mOptions.toBundle()*/);

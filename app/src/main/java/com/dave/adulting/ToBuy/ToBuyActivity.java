@@ -1,69 +1,56 @@
-package com.dave.adulting.Perishables;
+package com.dave.adulting.ToBuy;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 
 import com.dave.adulting.CommonInfrastructure.InfrastructureBaseActivity;
 import com.dave.adulting.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PerishableActivity extends InfrastructureBaseActivity {
+public class ToBuyActivity extends InfrastructureBaseActivity {
     private FirebaseRecyclerAdapter mAdapter;
     private DatabaseReference mRef;
-    private static final String TAG = "PerishableActivity";
-    public static final String PERISHABLES = "Perishables";
+    public static final String SHOPPING_LIST = "ShoppingList";
 
     @Override
     protected void onSpecificCreate() {
-        ICON_ID = R.id.actionPerishable;
-        setContentView(R.layout.activity_perishable);
+        ICON_ID = R.id.actionToBuy;
+        setContentView(R.layout.activity_to_buy);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(PERISHABLES);
+                .child(SHOPPING_LIST);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PerishableDialoger.addDialog(PerishableActivity.this, mRef, null);
+                ToBuyDialoger.addDialog(ToBuyActivity.this,mRef);
             }
         });
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.perishableRV);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.toBuyRV);
         rv.setHasFixedSize(false);
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        mAdapter = new FirebaseRecyclerAdapter<Perishable, PerishableVH>(
-                Perishable.class, R.layout.three_line_list_item, PerishableVH.class, mRef.orderByChild("expires")) {
+        mAdapter = new FirebaseRecyclerAdapter<ToBuyItem, ToBuyVH>(
+                ToBuyItem.class, R.layout.shopping_list_item, ToBuyVH.class, mRef) {
             @Override
-            protected void populateViewHolder(PerishableVH VH, Perishable model, int position) {
+            protected void populateViewHolder(ToBuyVH VH, ToBuyItem model, int position) {
                 VH.setTitle(model.getTitle());
-                VH.setLine1(model.getExpires());
-                VH.setLine2(model.getAdded());
+                VH.setLine1(model.getAdded());
                 VH.setAdapter(this);
             }
         };
         rv.setAdapter(mAdapter);
-        //super.onSpecificCreate();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mAdapter.cleanup();
-        mRef.onDisconnect();
     }
 }
