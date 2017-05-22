@@ -24,6 +24,11 @@
             android:label="@string/title_activity_tasks"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".Perishables.ToBuyActivity"
+            android:label="@string/title_activity_to_buy"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

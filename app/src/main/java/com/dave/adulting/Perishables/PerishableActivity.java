@@ -19,13 +19,13 @@ import com.google.firebase.database.FirebaseDatabase;
 public class PerishableActivity extends InfrastructureBaseActivity implements PerishableDialoger.PerAddListener {
     private FirebaseRecyclerAdapter mAdapter;
     private DatabaseReference mRef;
-    private static final String TAG = "PerishableActivity";
+    private static final String TAG = "PerishableActivity";;
 
     @Override
     protected void onSpecificCreate() {
+        ICON_ID = R.id.actionPerishable;
         setContentView(R.layout.activity_perishable);
 
-        Log.d(TAG, "onSpecificCreate happened!");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,11 +74,5 @@ public class PerishableActivity extends InfrastructureBaseActivity implements Pe
     @Override
     public void addPerishable(Perishable per) {
         mRef.push().setValue(per);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        prepareMenu(menu, R.id.actionPerishable);
-        return super.onPrepareOptionsMenu(menu);
     }
 }

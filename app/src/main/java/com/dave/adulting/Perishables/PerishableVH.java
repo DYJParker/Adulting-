@@ -37,7 +37,6 @@ class PerishableVH extends CompletableVH {
         mTitle = (TextView) itemView.findViewById(R.id.listTitle);
         mLine1 = (TextView) itemView.findViewById(R.id.listLine1);
         mLine2 = (TextView) itemView.findViewById(R.id.listLine2);
-        mDF = DateFormat.getDateInstance(DateFormat.SHORT);
     }
 
     public void setTitle(String title) {

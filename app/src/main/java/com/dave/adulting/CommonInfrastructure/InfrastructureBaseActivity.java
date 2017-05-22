@@ -3,11 +3,14 @@ package com.dave.adulting.CommonInfrastructure;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuItemImpl;
+import android.transition.AutoTransition;
 import android.transition.TransitionSet;
 import android.util.Log;
 import android.util.Pair;
@@ -41,6 +44,8 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
     protected static final int FB_SIGN_IN = 1000;
     protected Intent mFBSignin;
     protected ActivityOptions mOptions;
+    Menu mMenu;
+    protected static int ICON_ID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,18 +87,22 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
         startActivityForResult(mFBSignin, FB_SIGN_IN);
     }
 
-    protected void onSpecificCreate(){
+    protected void onSpecificCreate() {
         TransitionSet transition = new TransitionSet();
+        transition.addTransition(new AutoTransition());
         getWindow().setSharedElementEnterTransition(transition);
         getWindow().setSharedElementReturnTransition(transition);
-        Pair<View, String> pair = Pair.create(findViewById(R.id.toolbar),getString(R.string.toolbar_transition_name));
-        mOptions = ActivityOptions.makeSceneTransitionAnimation(this,pair);
+        Pair<View, String> pair = Pair.create(findViewById(R.id.appBar), getString(R.string.toolbar_transition_name));
+        mOptions = ActivityOptions.makeSceneTransitionAnimation(this, pair);
+        Log.d(TAG, "onSpecificCreate: ");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(com.dave.adulting.R.menu.menu_common, menu);
+        mMenu = menu;
+        //prepareMenu(menu);
         return true;
     }
 
@@ -119,27 +128,34 @@ public abstract class InfrastructureBaseActivity extends AppCompatActivity {
                         }
                     });
             return true;
-        } else if (id == R.id.actionPerishable) {
-            startActivity(new Intent(this, PerishableActivity.class)/*,mOptions.toBundle()*/);
-            return true;
-        } else if (id == R.id.actionTasks) {
-            startActivity(new Intent(this, TasksActivity.class)/*,mOptions.toBundle()*/);
+        } else if (id == R.id.actionPerishable || id == R.id.actionTasks) {
+            Intent inte;
+            if (id == R.id.actionTasks) {
+                inte = new Intent(this,TasksActivity.class);
+            } else {
+                inte = new Intent(this,PerishableActivity.class);
+            }
+            inte.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(inte/*, mOptions.toBundle()*/);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    protected void prepareMenu(Menu menu, int id){
-        Log.d(TAG, "prepareMenu: " + getResources().getResourceEntryName(id));
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean ret = super.onPrepareOptionsMenu(menu);
+        Log.d(TAG, "onPrepareOptionsMenu: " + getResources().getResourceEntryName(ICON_ID));
         MenuItem menuItem;
         for (int i = 0; i < menu.size(); i++) {
-            if ((menuItem = menu.getItem(i)).getIcon()!=null){
-                menuItem.getIcon().setTint(Color.BLACK);
+            if ((menuItem = menu.getItem(i)).getIcon() != null) {
+                menuItem.getIcon().mutate();
+                menuItem.getIcon().clearColorFilter();
             }
         }
-        menuItem = menu.findItem(id);
-        menuItem.getIcon().setTint(ContextCompat.getColor(this,R.color.colorAccent));
+        menuItem = menu.findItem(ICON_ID);
+        menuItem.getIcon().setColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         menuItem.setEnabled(false);
-        invalidateOptionsMenu();
+        return ret;
     }
 }

@@ -16,23 +16,27 @@
         android:inputType="text"
         android:maxLines="1"/>
 
-    <!--<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/taskDiaDueDateWrapper">
 
         <EditText
             android:id="@+id/taskDiaDueDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Due Date"
-            android:inputType="date"
-            android:maxLines="1"
+            android:layout_gravity="bottom"
             android:layout_weight="1"
-            android:layout_gravity="bottom"/>
+            android:hint="Due Date"
+            android:inputType="none"
+            android:maxLines="1"
+            android:focusable="false"/>
+
         <ImageButton
+            android:id="@+id/calendarButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_today_black_24dp"/>
-    </LinearLayout>-->
+    </LinearLayout>
 </LinearLayout>

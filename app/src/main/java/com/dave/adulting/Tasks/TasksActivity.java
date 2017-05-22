@@ -20,6 +20,7 @@ public class TasksActivity extends InfrastructureBaseActivity implements TaskDia
 
     @Override
     protected void onSpecificCreate() {
+        ICON_ID = R.id.actionTasks;
         setContentView(R.layout.activity_tasks);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,11 +44,11 @@ public class TasksActivity extends InfrastructureBaseActivity implements TaskDia
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         mAdapter = new FirebaseRecyclerAdapter<Task, TaskVH>(
-                Task.class, R.layout.two_line_list_item, TaskVH.class, mRef.orderByChild("expires")) {
+                Task.class, R.layout.two_line_list_item, TaskVH.class, mRef.orderByChild("dueDate")) {
             @Override
             protected void populateViewHolder(TaskVH VH, Task model, int position) {
                 VH.setDescription(model.getDescription());
-                //VH.setDueDate(model.getDueDate());
+                if(model.getDueDate()!=null)VH.setDueDate(model.getDueDate());
                 VH.setAdapter(this);
             }
         };
@@ -58,11 +59,5 @@ public class TasksActivity extends InfrastructureBaseActivity implements TaskDia
     @Override
     public void addTask(Task task) {
         mRef.push().setValue(task);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        prepareMenu(menu, R.id.actionTasks);
-        return super.onPrepareOptionsMenu(menu);
     }
 }

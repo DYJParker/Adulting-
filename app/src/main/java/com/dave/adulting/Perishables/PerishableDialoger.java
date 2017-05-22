@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.EventLogTags;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -22,24 +23,22 @@ import java.util.GregorianCalendar;
  */
 
 class PerishableDialoger {
-    public static void addDialog(Context ctx, final PerAddListener listener){
-        View diag = ((LayoutInflater)ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dialog_add_perishable,null);
+    public static void addDialog(Context ctx, final PerAddListener listener) {
+        View diag = ((LayoutInflater) ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dialog_add_perishable, null);
         final EditText description = (EditText) diag.findViewById(R.id.perDiaDescription);
         final EditText estimate = (EditText) diag.findViewById(R.id.perDiaEstimate);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
         builder.setView(diag);
-        builder.setPositiveButton("OK",null);
-        builder.setNegativeButton("Cancel",null);
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("Cancel", null);
         final AlertDialog dialog = builder.create();
         dialog.show();
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(description.getText().length()==0){
-                    description.setError("Required");
-                } else {
+                if (description.getText().length() != 0 && estimate.getText().length() != 0) {
                     Calendar cal = GregorianCalendar.getInstance();
                     long added = CompletableVH.setMidnight(cal.getTimeInMillis());
                     cal.setTimeInMillis(added);
@@ -47,17 +46,23 @@ class PerishableDialoger {
                             Integer.parseInt(estimate.getText().toString()));
                     listener.addPerishable(new Perishable(
                             description.getText().toString(),
-                            cal.getTimeInMillis()+1,
+                            cal.getTimeInMillis() + 1,
                             added
                     ));
                     dialog.dismiss();
+                } else {
+                    if (description.getText().length() == 0) {
+                        description.setError("Required");
+                    }
+                    if (estimate.getText().length() == 0) {
+                        estimate.setError("Why even bother?");
+                    }
                 }
-
             }
         });
     }
 
-    interface PerAddListener{
+    interface PerAddListener {
         void addPerishable(Perishable per);
     }
 }
