@@ -2,12 +2,15 @@ package com.dave.adulting.CommonInfrastructure;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.transition.AutoTransition;
 import android.transition.TransitionSet;
 import android.util.Log;
@@ -15,9 +18,16 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bluelinelabs.conductor.Conductor;
+import com.bluelinelabs.conductor.Controller;
+import com.bluelinelabs.conductor.Router;
+import com.bluelinelabs.conductor.RouterTransaction;
+import com.bluelinelabs.conductor.support.RouterPagerAdapter;
 import com.dave.adulting.Perishables.PerishableActivity;
+import com.dave.adulting.Perishables.PerishableController;
 import com.dave.adulting.R;
 import com.dave.adulting.Tasks.TasksActivity;
 import com.dave.adulting.ToBuy.ToBuyActivity;
@@ -32,19 +42,37 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
+import java.util.Locale;
 
-/**
- * Created by Dave - Work on 5/16/2017.
- */
+public class ConductorActivity extends AppCompatActivity {
+    private static final String TAG = "ConductorActivity";
+    private FirebaseAuth mAuth;
+    private static final int FB_SIGN_IN = 1000;
+    private Intent mFBSignin;
+    private ActivityOptions mOptions;
+    private Router mRouter;
 
-public class InfrastructureBaseActivity extends AppCompatActivity {
-    private static final String TAG = "InfrastructureBaseActiv";
-    protected FirebaseAuth mAuth;
-    protected static final int FB_SIGN_IN = 1000;
-    protected Intent mFBSignin;
-    protected ActivityOptions mOptions;
-    Menu mMenu;
-    protected static int ICON_ID;
+    protected void onSpecificCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_conductor);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //transitionSetter();
+
+        ViewGroup container = (ViewGroup) findViewById(R.id.conductorFrame);
+
+        mRouter = Conductor.attachRouter(this,container,savedInstanceState);
+        if(!mRouter.hasRootController()){
+            mRouter.setRoot(RouterTransaction.with(new PagerController()));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!mRouter.handleBack()) {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +88,7 @@ public class InfrastructureBaseActivity extends AppCompatActivity {
                     .build();
             startActivityForResult(mFBSignin, FB_SIGN_IN);
         } else {
-            onSpecificCreate();
+            onSpecificCreate(savedInstanceState);
         }
     }
 
@@ -71,7 +99,7 @@ public class InfrastructureBaseActivity extends AppCompatActivity {
         if (requestCode == FB_SIGN_IN) {
             if (resultCode == ResultCodes.OK) {
                 FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-                onSpecificCreate();
+                onSpecificCreate(null);
             } else signInError(IdpResponse.fromResultIntent(data));
         }
     }
@@ -86,22 +114,19 @@ public class InfrastructureBaseActivity extends AppCompatActivity {
         startActivityForResult(mFBSignin, FB_SIGN_IN);
     }
 
-    protected void onSpecificCreate() {
+    private void transitionSetter(){
         TransitionSet transition = new TransitionSet();
         transition.addTransition(new AutoTransition());
         getWindow().setSharedElementEnterTransition(transition);
         getWindow().setSharedElementReturnTransition(transition);
         Pair<View, String> pair = Pair.create(findViewById(R.id.appBar), getString(R.string.toolbar_transition_name));
         mOptions = ActivityOptions.makeSceneTransitionAnimation(this, pair);
-        Log.d(TAG, "onSpecificCreate: ");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(com.dave.adulting.R.menu.menu_common, menu);
-        mMenu = menu;
-        //prepareMenu(menu);
         return true;
     }
 
@@ -141,22 +166,5 @@ public class InfrastructureBaseActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean ret = super.onPrepareOptionsMenu(menu);
-        Log.d(TAG, "onPrepareOptionsMenu: " + getResources().getResourceEntryName(ICON_ID));
-        MenuItem menuItem;
-        for (int i = 0; i < menu.size(); i++) {
-            if ((menuItem = menu.getItem(i)).getIcon() != null) {
-                menuItem.getIcon().mutate();
-                menuItem.getIcon().clearColorFilter();
-            }
-        }
-        menuItem = menu.findItem(ICON_ID);
-        menuItem.getIcon().setColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
-        menuItem.setEnabled(false);
-        return ret;
     }
 }

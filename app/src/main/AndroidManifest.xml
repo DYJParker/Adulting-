@@ -13,11 +13,6 @@
             android:name=".Perishables.PerishableActivity"
             android:label="@string/title_activity_perishables"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".Tasks.TasksActivity"
@@ -28,6 +23,16 @@
             android:name=".ToBuy.ToBuyActivity"
             android:label="@string/title_activity_to_buy"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CommonInfrastructure.ConductorActivity"
+            android:label="@string/title_activity_conductor"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

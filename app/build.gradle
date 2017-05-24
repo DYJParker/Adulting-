@@ -38,8 +38,11 @@ dependencies {
     compile 'com.google.firebase:firebase-database:10.2.4'
     compile 'com.google.firebase:firebase-messaging:10.2.4'
     compile 'com.google.firebase:firebase-storage:10.2.4'
+    compile 'com.bluelinelabs:conductor:2.1.1'
+    compile 'com.bluelinelabs:conductor-support:2.1.2'
     testCompile 'junit:junit:4.12'
 }
+
 
 
 
