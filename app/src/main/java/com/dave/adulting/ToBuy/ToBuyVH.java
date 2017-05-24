@@ -5,7 +5,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.dave.adulting.CommonInfrastructure.CompletableVH;
-import com.dave.adulting.Perishables.PerishableActivity;
+import com.dave.adulting.Perishables.PerishableController;
 import com.dave.adulting.Perishables.PerishableDialoger;
 import com.dave.adulting.R;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +35,7 @@ class ToBuyVH extends CompletableVH {
     public void onClick(View v) {
         if (v.getId() != R.id.cartRemove) {
             DatabaseReference ref = mAdapter.getRef(getAdapterPosition()).getParent().getParent()
-                    .child(PerishableActivity.PERISHABLES);
+                    .child(PerishableController.KEY);
             PerishableDialoger.addDialog(v.getContext(),ref,mTitle.getText().toString());
         }
         mAdapter.getRef(getAdapterPosition()).removeValue();

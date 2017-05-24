@@ -1,23 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.dave.adulting.Perishables.PerishableActivity"
-    >
-    <item
-        android:id="@+id/actionPerishable"
-        android:icon="@drawable/ic_delete_forever_black_24dp"
-        android:title="Perishables"
-        app:showAsAction="always"/>
-    <item
-        android:id="@+id/actionToBuy"
-        android:icon="@drawable/ic_local_grocery_store_black_24dp"
-        app:showAsAction="always"
-        android:title="To Buy List"/>
-    <item
-        android:id="@+id/actionTasks"
-        android:icon="@drawable/ic_playlist_add_check_black_24dp"
-        app:showAsAction="always"
-        android:title="Tasks"/>
+      tools:context="com.dave.adulting.Perishables.PerishableActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

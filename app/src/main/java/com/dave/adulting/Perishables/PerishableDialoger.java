@@ -4,18 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.util.EventLogTags;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
 import com.dave.adulting.CommonInfrastructure.CompletableVH;
-import com.dave.adulting.CommonInfrastructure.InfrastructureBaseActivity;
 import com.dave.adulting.R;
 import com.google.firebase.database.DatabaseReference;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 

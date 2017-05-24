@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.dave.adulting.CommonInfrastructure.CompletableVH;
 import com.dave.adulting.R;
-import com.dave.adulting.ToBuy.ToBuyActivity;
+import com.dave.adulting.ToBuy.ToBuyController;
 import com.dave.adulting.ToBuy.ToBuyItem;
 import com.google.firebase.database.DatabaseReference;
 
@@ -46,7 +46,7 @@ class PerishableVH extends CompletableVH {
     public void onClick(View v) {
         final Perishable temp = ((Perishable) mAdapter.getItem(getAdapterPosition()));
         final DatabaseReference shopping = mAdapter.getRef(getAdapterPosition())
-                .getParent().getParent().child(ToBuyActivity.SHOPPING_LIST).push();
+                .getParent().getParent().child(ToBuyController.KEY).push();
         shopping.setValue(new ToBuyItem(
                 temp.getTitle(),
                 GregorianCalendar.getInstance().getTimeInMillis())
@@ -56,7 +56,7 @@ class PerishableVH extends CompletableVH {
                 .setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        shopping.getParent().getParent().child(PerishableActivity.PERISHABLES).push().setValue(temp);
+                        shopping.getParent().getParent().child(PerishableController.KEY).push().setValue(temp);
                         shopping.removeValue();
                     }
                 }).show();

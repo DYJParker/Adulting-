@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.dave.adulting.R;
+import com.google.firebase.database.DatabaseReference;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -23,7 +24,7 @@ import static java.util.Calendar.YEAR;
  */
 
 public class TaskDialoger {
-    public static void addDialog(final Context ctx, final TaskAddListener listener) {
+    public static void addDialog(final Context ctx, final DatabaseReference ref) {
         View diag = ((LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dialog_add_task, null);
         final EditText description = (EditText) diag.findViewById(R.id.taskDiaDescription);
         final EditText estimate = (EditText) diag.findViewById(R.id.taskDiaDueDate);
@@ -69,7 +70,7 @@ public class TaskDialoger {
                 if (description.getText().length() == 0) {
                     description.setError("Required");
                 } else {
-                    listener.addTask(new Task(
+                    ref.push().setValue(new Task(
                             description.getText().toString(),
                             due.mSet?due.mDue.getTime():null
                     ));
