@@ -99,9 +99,9 @@ public class PagerController extends Controller {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         MenuItem mi = menu.add(Menu.NONE,ADD_MENU_ID,99,"Add New Item");
-        mi.setIcon(R.drawable.ic_add_black_24dp);
-        //mi.getIcon().setTint(((AppCompatActivity)getActivity()).getSupportActionBar().g);
+        mi.setIcon(R.drawable.ic_add_box_24dp);
         mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
     }
 
     @Override

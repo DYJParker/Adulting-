@@ -2,6 +2,7 @@ package com.dave.adulting.CommonInfrastructure;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -143,4 +144,15 @@ public class ConductorActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+/*    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mi;
+        for (int i = 0; i < menu.size(); i++) {
+            if((mi = menu.getItem(i)).getIcon() != null){
+                mi.getIcon().setTint();
+            }
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }*/
 }
