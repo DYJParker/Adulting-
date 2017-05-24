@@ -1,4 +1,4 @@
-package com.dave.adulting.Perishables;
+package com.dave.adulting.ToBuy;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,20 +17,18 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by Dave - Work on 5/23/2017.
  */
 
-public class PerishableController extends FireBaseController {
-
-    public static final String KEY = "Perishables";
+public class ToBuyController extends FireBaseController {
+    public static final String KEY = "Shopping";
 
     @Override
     protected FirebaseRecyclerAdapter adapt() {
         mRef = mRef.child(KEY);
-        return new FirebaseRecyclerAdapter<Perishable, PerishableVH>(
-                Perishable.class, R.layout.three_line_list_item, PerishableVH.class, mRef.orderByChild("expires")) {
+        return new FirebaseRecyclerAdapter<ToBuyItem, ToBuyVH>(
+                ToBuyItem.class, R.layout.shopping_list_item, ToBuyVH.class, mRef) {
             @Override
-            protected void populateViewHolder(PerishableVH VH, Perishable model, int position) {
+            protected void populateViewHolder(ToBuyVH VH, ToBuyItem model, int position) {
                 VH.setTitle(model.getTitle());
-                VH.setLine1(model.getExpires());
-                VH.setLine2(model.getAdded());
+                VH.setLine1(model.getAdded());
                 VH.setAdapter(this);
             }
         };
@@ -38,6 +36,6 @@ public class PerishableController extends FireBaseController {
 
     @Override
     public void adder() {
-        PerishableDialoger.addDialog(getActivity(),mRef,null);
+        ToBuyDialoger.addDialog(getActivity(),mRef);
     }
 }

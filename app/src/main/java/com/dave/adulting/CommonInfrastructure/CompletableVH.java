@@ -1,8 +1,12 @@
 package com.dave.adulting.CommonInfrastructure;
 
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -46,8 +50,12 @@ public abstract class CompletableVH extends RecyclerView.ViewHolder implements /
         float x = TimeUnit.MILLISECONDS.toDays(time - midnightThisMorning);
         int textColor;
         if (x >= 0) {
-            double orangeness = Math.pow(0.75,x);
-            textColor = Color.rgb((int)(255*orangeness),(int)(140*orangeness),0);
+            float orangeness = (float) Math.pow(0.75,x);
+            //TypedValue typedValue = new TypedValue();
+            //Resources.Theme theme = textViews[0].getContext().getTheme();
+            //theme.resolveAttribute(R.attr.subtitleTextColor, typedValue, true);
+            //@ColorInt int color = typedValue.data;
+            textColor = ColorUtils.blendARGB(textViews[0].getCurrentTextColor(),Color.rgb(255,140,0),orangeness);
         } else textColor = Color.RED;
         for(TextView text : textViews) text.setTextColor(textColor);
     }
