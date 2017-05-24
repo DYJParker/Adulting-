@@ -45,7 +45,7 @@ class ToBuyVH extends CompletableVH {
         mTitle.setText(title);
     }
 
-    public void setLine1(long added) {
-        mDate.setText(mDF.format(new Date(added)));
+    public void setLine1(String added) {
+        mDate.setText(added);
     }
 }

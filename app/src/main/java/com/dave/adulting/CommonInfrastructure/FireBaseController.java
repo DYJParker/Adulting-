@@ -26,7 +26,8 @@ public abstract class FireBaseController extends Controller {
         View content = inflater.inflate(R.layout.controller_content, container, false);
 
         mRef = FirebaseDatabase.getInstance().getReference("users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("testing");
 
         RecyclerView rv = (RecyclerView) content.findViewById(R.id.perishableRV);
         rv.setHasFixedSize(false);

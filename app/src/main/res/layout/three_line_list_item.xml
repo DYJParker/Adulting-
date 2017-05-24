@@ -50,5 +50,5 @@
         android:layout_gravity="center_vertical"
         android:scaleType="center"
         android:src="@drawable/ic_check_black_24dp"
-        android:tint="@android:color/secondary_text_light"/>
+        android:tint="?android:attr/textColorSecondary"/>
 </LinearLayout>

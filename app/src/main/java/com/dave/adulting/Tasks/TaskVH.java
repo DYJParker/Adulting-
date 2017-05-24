@@ -31,8 +31,8 @@ class TaskVH extends CompletableVH {
 
     void setDescription(String description){mDescription.setText(description);}
 
-    void setDueDate(long dueDate){
-        mDueDate.setText(mDF.format(new Date(dueDate)));
-        setCriticalityColor(dueDate,mDescription,mDueDate);
+    void setDueDate(String dueDate){
+        mDueDate.setText(dueDate);
+        setCriticalityColor(dueDate, mDescription, mDueDate);
     }
 }

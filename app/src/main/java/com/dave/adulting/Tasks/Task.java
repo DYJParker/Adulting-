@@ -1,17 +1,18 @@
 package com.dave.adulting.Tasks;
 
+import com.dave.adulting.CommonInfrastructure.CommonObject;
+
 /**
  * Created by Dave - Work on 5/19/2017.
  */
 
-public class Task {
-    private String mDescription;
-    private Long mDueDate;
+public class Task extends CommonObject{
+    private String mDescription, mDueDate;
 
     public Task() {
     }
 
-    public Task(String description, Long dueDate) {
+    public Task(String description, String dueDate) {
         mDescription = description;
         mDueDate = dueDate;
     }
@@ -24,11 +25,11 @@ public class Task {
         mDescription = description;
     }
 
-    public Long getDueDate() {
+    public String getDueDate() {
         return mDueDate;
     }
 
-    public void setDueDate(Long dueDate) {
+    public void setDueDate(String dueDate) {
         mDueDate = dueDate;
     }
 }

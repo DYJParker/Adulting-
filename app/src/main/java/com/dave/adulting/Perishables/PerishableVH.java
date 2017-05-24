@@ -1,6 +1,8 @@
 package com.dave.adulting.Perishables;
 
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +12,7 @@ import com.dave.adulting.ToBuy.ToBuyController;
 import com.dave.adulting.ToBuy.ToBuyItem;
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -33,13 +36,13 @@ class PerishableVH extends CompletableVH {
         mTitle.setText(title);
     }
 
-    public void setLine1(long expires) {
-        mLine1.setText(mDF.format(new Date(expires)));
-        setCriticalityColor(expires, mTitle, mLine1, mLine2);
+    public void setLine1(String expires) {
+        mLine1.setText(expires);
+        setCriticalityColor(expires, mTitle, mLine1);
     }
 
-    public void setLine2(long added) {
-        mLine2.setText(mDF.format(new Date(added)));
+    public void setLine2(String added) {
+        mLine2.setText(added);
     }
 
     @Override
@@ -49,8 +52,8 @@ class PerishableVH extends CompletableVH {
                 .getParent().getParent().child(ToBuyController.KEY).push();
         shopping.setValue(new ToBuyItem(
                 temp.getTitle(),
-                GregorianCalendar.getInstance().getTimeInMillis())
-        );
+                DateFormat.getDateInstance(ToBuyItem.DATE_FORMAT).format(GregorianCalendar.getInstance().getTime())
+        ));
 
         Snackbar.make(v, "Moved " + temp.getTitle() + " to the shopping list", Snackbar.LENGTH_LONG)
                 .setAction("UNDO", new View.OnClickListener() {

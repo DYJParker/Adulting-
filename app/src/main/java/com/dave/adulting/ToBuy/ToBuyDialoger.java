@@ -13,6 +13,7 @@ import com.dave.adulting.Perishables.Perishable;
 import com.dave.adulting.R;
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -37,10 +38,9 @@ public class ToBuyDialoger {
             public void onClick(View v) {
                 if (description.getText().length() != 0) {
                     Calendar cal = GregorianCalendar.getInstance();
-                    long added = CompletableVH.setMidnight(cal.getTimeInMillis());
                     ref.push().setValue(new ToBuyItem(
                             description.getText().toString(),
-                            added
+                            DateFormat.getDateInstance(ToBuyItem.DATE_FORMAT).format(cal.getTime())
                     ));
                     dialog.dismiss();
                 } else {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.dave.adulting.CommonInfrastructure.CommonObject;
 import com.dave.adulting.R;
 import com.google.firebase.database.DatabaseReference;
 
@@ -43,8 +44,8 @@ public class TaskDialoger {
                                 cal.set(YEAR, year);
                                 cal.set(Calendar.MONTH, month);
                                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                due.mDue = new Date(cal.getTimeInMillis());
-                                estimate.setText(DateFormat.getDateInstance(DateFormat.SHORT).format(due.mDue));
+                                due.mDue = DateFormat.getDateInstance(Task.DATE_FORMAT).format(cal.getTime());
+                                estimate.setText(due.mDue);
                                 due.mSet = true;
                             }
                         },
@@ -72,7 +73,7 @@ public class TaskDialoger {
                 } else {
                     ref.push().setValue(new Task(
                             description.getText().toString(),
-                            due.mSet?due.mDue.getTime():null
+                            due.mSet?due.mDue:null
                     ));
                     dialog.dismiss();
                 }
@@ -80,12 +81,8 @@ public class TaskDialoger {
         });
     }
 
-    interface TaskAddListener {
-        void addTask(Task task);
-    }
-
     private static class DuePackage{
-        Date mDue;
+        String mDue;
         boolean mSet = false;
     }
 }

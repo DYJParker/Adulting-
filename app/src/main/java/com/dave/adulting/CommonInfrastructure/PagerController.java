@@ -89,7 +89,6 @@ public class PagerController extends Controller {
 
     @Override
     protected void onAttach(@NonNull View view) {
-        Log.d(TAG, "onAttach: ");
         super.onAttach(view);
         mViewPager.setAdapter(mPager);
         mTabs.setupWithViewPager(mViewPager, false);
