@@ -129,9 +129,9 @@ public class ConductorActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_signout) {
+        } else*/ if (id == R.id.action_signout) {
             final AppCompatActivity ctx = this;
             AuthUI.getInstance()
                     .signOut(ctx)

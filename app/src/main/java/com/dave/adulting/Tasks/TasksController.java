@@ -35,6 +35,11 @@ public class TasksController extends FireBaseController {
     }
 
     @Override
+    protected int getNewID() {
+        return R.id.tasksRV;
+    }
+
+    @Override
     public void adder() {
         TaskDialoger.addDialog(getActivity(),mRef);
     }

@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/twoLine">
 
         <TextView
             android:id="@+id/listTitle"

@@ -37,6 +37,11 @@ public class PerishableController extends FireBaseController {
     }
 
     @Override
+    protected int getNewID() {
+        return R.id.perishableRV;
+    }
+
+    @Override
     public void adder() {
         PerishableDialoger.addDialog(getActivity(),mRef,null);
     }

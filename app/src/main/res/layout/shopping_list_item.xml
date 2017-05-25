@@ -10,7 +10,8 @@
         android:layout_height="68dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/shopping">
 
         <TextView
             android:id="@+id/listTitle"

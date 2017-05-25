@@ -35,6 +35,11 @@ public class ToBuyController extends FireBaseController {
     }
 
     @Override
+    protected int getNewID() {
+        return R.id.shoppingRV;
+    }
+
+    @Override
     public void adder() {
         ToBuyDialoger.addDialog(getActivity(),mRef);
     }

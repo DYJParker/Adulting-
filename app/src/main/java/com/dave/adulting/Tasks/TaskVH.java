@@ -15,7 +15,7 @@ import java.util.Date;
  * Created by Dave - Work on 5/19/2017.
  */
 
-class TaskVH extends CompletableVH {
+public class TaskVH extends CompletableVH {
     TextView mDescription, mDueDate;
 
     public TaskVH(View itemView) {

@@ -22,7 +22,7 @@ import java.util.GregorianCalendar;
  * Created by Dave - Work on 5/16/2017.
  */
 
-class PerishableVH extends CompletableVH {
+public class PerishableVH extends CompletableVH {
     private static final String TAG = "PerishableVH";
     TextView mTitle, mLine1, mLine2;
 

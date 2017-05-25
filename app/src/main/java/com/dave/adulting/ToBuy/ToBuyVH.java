@@ -20,7 +20,7 @@ import java.util.Date;
  * Created by Dave - Work on 5/22/2017.
  */
 
-class ToBuyVH extends CompletableVH {
+public class ToBuyVH extends CompletableVH {
     private TextView mTitle, mDate;
     private ImageButton mBuy, mRemove;
 

@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 public class PagerController extends Controller {
-    private static final int ADD_MENU_ID = 99;
+    public static final int ADD_MENU_ID = 99;
     private ViewPager mViewPager;
     private TabLayout mTabs;
     private final RouterPagerAdapter mPager;

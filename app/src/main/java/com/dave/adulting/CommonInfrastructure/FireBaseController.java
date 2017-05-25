@@ -1,6 +1,7 @@
 package com.dave.adulting.CommonInfrastructure;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,16 +41,20 @@ public abstract class FireBaseController extends Controller {
         mRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        mRV = (RecyclerView) content.findViewById(R.id.perishableRV);
+        mRV = (RecyclerView) content.findViewById(R.id.pagerRV);
         mRV.setHasFixedSize(false);
 
         mAdapter = adapt();
         mRV.setAdapter(mAdapter);
 
+        mRV.setId(getNewID());
+
         return content;
     }
 
     abstract protected FirebaseRecyclerAdapter adapt();
+
+    abstract protected @IdRes int getNewID();
 
     @Override
     protected void onRestoreViewState(@NonNull View view, @NonNull Bundle savedViewState) {
