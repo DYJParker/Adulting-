@@ -48,7 +48,7 @@ public class PagerController extends Controller {
             public void configureRouter(@NonNull Router router, int position) {
                 if (!router.hasRootController()) {
                     try {
-                        FireBaseController page = (FireBaseController)CONTROLLERS[position].newInstance();
+                        FireBaseController page = (FireBaseController) CONTROLLERS[position].newInstance();
                         router.setRoot(RouterTransaction.with(page));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -78,14 +78,12 @@ public class PagerController extends Controller {
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         Log.d(TAG, "onCreateView: ");
-        View view = inflater.inflate(R.layout.controller_pager,container,false);
+        View view = inflater.inflate(R.layout.controller_pager, container, false);
         mTabs = (TabLayout) getActivity().findViewById(R.id.conductorTabs);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         setHasOptionsMenu(true);
         return view;
     }
-
-
 
     @Override
     protected void onAttach(@NonNull View view) {
@@ -97,19 +95,25 @@ public class PagerController extends Controller {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem mi = menu.add(Menu.NONE,ADD_MENU_ID,99,"Add New Item");
+        MenuItem mi = menu.add(Menu.NONE, ADD_MENU_ID, 99, "Add New Item");
         mi.setIcon(R.drawable.ic_add_box_24dp);
         mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == ADD_MENU_ID){
+        if (item.getItemId() == ADD_MENU_ID) {
             List<RouterTransaction> stack = mPager.getRouter(mViewPager.getCurrentItem()).getBackstack();
-            ((FireBaseController)stack.get(stack.size()-1).controller()).adder();
+            ((FireBaseController) stack.get(stack.size() - 1).controller()).adder();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroyView(@NonNull View view) {
+        mViewPager.setAdapter(null);
+        mTabs.setupWithViewPager(null);
+        super.onDestroyView(view);
     }
 }

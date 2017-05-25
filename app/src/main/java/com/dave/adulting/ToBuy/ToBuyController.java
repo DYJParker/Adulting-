@@ -24,7 +24,7 @@ public class ToBuyController extends FireBaseController {
     protected FirebaseRecyclerAdapter adapt() {
         mRef = mRef.child(KEY);
         return new FirebaseRecyclerAdapter<ToBuyItem, ToBuyVH>(
-                ToBuyItem.class, R.layout.shopping_list_item, ToBuyVH.class, mRef) {
+                ToBuyItem.class, R.layout.list_card, ToBuyVH.class, mRef) {
             @Override
             protected void populateViewHolder(ToBuyVH VH, ToBuyItem model, int position) {
                 VH.setTitle(model.getTitle());

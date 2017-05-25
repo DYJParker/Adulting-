@@ -1,6 +1,7 @@
 package com.dave.adulting.Tasks;
 
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.TextView;
 
 import com.dave.adulting.CommonInfrastructure.CompletableVH;
@@ -18,8 +19,7 @@ class TaskVH extends CompletableVH {
     TextView mDescription, mDueDate;
 
     public TaskVH(View itemView) {
-        super(itemView);
-
+        super(itemView, R.layout.two_line_list_item);
         mDescription = (TextView) itemView.findViewById(R.id.listTitle);
         mDueDate = (TextView) itemView.findViewById(R.id.listLine1);
     }
@@ -29,9 +29,11 @@ class TaskVH extends CompletableVH {
         mAdapter.getRef(getAdapterPosition()).removeValue();
     }
 
-    void setDescription(String description){mDescription.setText(description);}
+    void setDescription(String description) {
+        mDescription.setText(description);
+    }
 
-    void setDueDate(String dueDate){
+    void setDueDate(String dueDate) {
         mDueDate.setText(dueDate);
         setCriticalityColor(dueDate, mDescription, mDueDate);
     }

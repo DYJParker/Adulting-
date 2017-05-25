@@ -6,10 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.AutoTransition;
 import android.transition.TransitionSet;
+import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Arrays;
 
 public class ConductorActivity extends AppCompatActivity {
+    private static final int LANDSCAPE_CRITERION = 250;
     private static final String TAG = "ConductorActivity";
     private FirebaseAuth mAuth;
     private static final int FB_SIGN_IN = 1000;
@@ -46,12 +49,20 @@ public class ConductorActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //transitionSetter();
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float dpWidth = metrics.widthPixels / metrics.density;
+        if(dpWidth > LANDSCAPE_CRITERION * 2) {
+            ((AppBarLayout.LayoutParams) findViewById(R.id.conductorTabs).getLayoutParams())
+                    .setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL |
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS |
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP);
+        }
+        FireBaseController.setLandscapeCriterion(LANDSCAPE_CRITERION);
 
         ViewGroup container = (ViewGroup) findViewById(R.id.conductorFrame);
 
-        mRouter = Conductor.attachRouter(this,container,savedInstanceState);
-        if(!mRouter.hasRootController()){
+        mRouter = Conductor.attachRouter(this, container, savedInstanceState);
+        if (!mRouter.hasRootController()) {
             mRouter.setRoot(RouterTransaction.with(new PagerController()));
         }
     }
@@ -103,15 +114,6 @@ public class ConductorActivity extends AppCompatActivity {
         startActivityForResult(mFBSignin, FB_SIGN_IN);
     }
 
-    private void transitionSetter(){
-        TransitionSet transition = new TransitionSet();
-        transition.addTransition(new AutoTransition());
-        getWindow().setSharedElementEnterTransition(transition);
-        getWindow().setSharedElementReturnTransition(transition);
-        Pair<View, String> pair = Pair.create(findViewById(R.id.appBar), getString(R.string.toolbar_transition_name));
-        mOptions = ActivityOptions.makeSceneTransitionAnimation(this, pair);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -144,15 +146,4 @@ public class ConductorActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-/*    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem mi;
-        for (int i = 0; i < menu.size(); i++) {
-            if((mi = menu.getItem(i)).getIcon() != null){
-                mi.getIcon().setTint();
-            }
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }*/
 }

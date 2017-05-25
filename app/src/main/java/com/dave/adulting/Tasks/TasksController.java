@@ -24,7 +24,7 @@ public class TasksController extends FireBaseController {
     protected FirebaseRecyclerAdapter adapt() {
         mRef = mRef.child(KEY);
         return new FirebaseRecyclerAdapter<Task, TaskVH>(
-                Task.class, R.layout.two_line_list_item, TaskVH.class, mRef.orderByChild("dueDate")) {
+                Task.class, R.layout.list_card, TaskVH.class, mRef.orderByChild("dueDate")) {
             @Override
             protected void populateViewHolder(TaskVH VH, Task model, int position) {
                 VH.setDescription(model.getDescription());

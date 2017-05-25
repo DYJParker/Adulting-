@@ -25,7 +25,7 @@ public class PerishableController extends FireBaseController {
     protected FirebaseRecyclerAdapter adapt() {
         mRef = mRef.child(KEY);
         return new FirebaseRecyclerAdapter<Perishable, PerishableVH>(
-                Perishable.class, R.layout.three_line_list_item, PerishableVH.class, mRef.orderByChild("expires")) {
+                Perishable.class, R.layout.list_card, PerishableVH.class, mRef.orderByChild("expires")) {
             @Override
             protected void populateViewHolder(PerishableVH VH, Perishable model, int position) {
                 VH.setTitle(model.getTitle());

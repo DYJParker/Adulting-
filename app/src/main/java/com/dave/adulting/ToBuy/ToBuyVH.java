@@ -1,6 +1,10 @@
 package com.dave.adulting.ToBuy;
 
+import android.app.Activity;
+import android.support.v7.widget.CardView;
+import android.test.mock.MockContext;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,7 +25,7 @@ class ToBuyVH extends CompletableVH {
     private ImageButton mBuy, mRemove;
 
     public ToBuyVH(View itemView) {
-        super(itemView);
+        super(itemView, R.layout.shopping_list_item);
         mTitle = (TextView) itemView.findViewById(R.id.listTitle);
         mDate = (TextView) itemView.findViewById(R.id.listLine1);
         mBuy = (ImageButton) itemView.findViewById(R.id.cartAdd);

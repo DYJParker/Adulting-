@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewStub;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dave.adulting.CommonInfrastructure.CompletableVH;
@@ -25,8 +27,7 @@ class PerishableVH extends CompletableVH {
     TextView mTitle, mLine1, mLine2;
 
     public PerishableVH(View itemView) {
-        super(itemView);
-
+        super(itemView, R.layout.three_line_list_item);
         mTitle = (TextView) itemView.findViewById(R.id.listTitle);
         mLine1 = (TextView) itemView.findViewById(R.id.listLine1);
         mLine2 = (TextView) itemView.findViewById(R.id.listLine2);

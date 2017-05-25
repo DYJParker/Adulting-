@@ -1,14 +1,19 @@
 package com.dave.adulting.CommonInfrastructure;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.v4.graphics.ColorUtils;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -32,14 +37,18 @@ public abstract class CompletableVH extends RecyclerView.ViewHolder implements /
     protected FirebaseRecyclerAdapter mAdapter;
     private static final String TAG = "CompletableVH";
 
-    public CompletableVH(View itemView) {
+    public CompletableVH(View itemView, @LayoutRes int id) {
         super(itemView);
-
+        ViewStub slot = ((ViewStub) itemView.findViewById(R.id.slot));
+        slot.setLayoutResource(id);
+        slot.inflate();
+        //itemView.findViewById(R.id.content).requestLayout();
         mDF = DateFormat.getDateInstance(DateFormat.SHORT);
-        if (itemView.findViewById(R.id.check) != null) {
-            mCheck = (ImageButton) itemView.findViewById(R.id.check);
-            mCheck.setOnClickListener(this);
-        }
+        mCheck = (ImageButton) itemView.findViewById(R.id.check);
+        if (id != R.layout.shopping_list_item) mCheck.setOnClickListener(this);
+        else mCheck.setVisibility(View.GONE);
+
+        //((RecyclerView)itemView.getParent()).getLayoutManager()
         //itemView.setOnLongClickListener(this);
     }
 
