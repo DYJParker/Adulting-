@@ -6,6 +6,7 @@ import com.dave.adulting.CommonInfrastructure.CommonObject;
  * Created by Dave - Work on 5/19/2017.
  */
 
+//Boring POJO (BOJO??) to represent a task.
 public class Task extends CommonObject{
     private String mDescription, mDueDate;
 

@@ -23,18 +23,22 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by Dave - Work on 5/23/2017.
  */
 
+//parent class for all my Conductor Controllers (ie Fragment-alternatives)
 public abstract class FireBaseController extends Controller {
     private FirebaseRecyclerAdapter mAdapter;
     private RecyclerView mRV;
     protected DatabaseReference mRef;
     private static final String TAG = "FireBaseController";
 
+    //Provided from elsewhere, ConductorActivity in the current case.
     private static Integer sLandscapeCriterion = null;
 
+    //Method to set the above from outside.
     public static void setLandscapeCriterion(Integer landscapeCriterion) {
         sLandscapeCriterion = landscapeCriterion;
     }
 
+    //Inflate and set up the RecyclerView, delegating adapter setup to the concrete child class.
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         View content = inflater.inflate(R.layout.controller_content, container, false);
 
@@ -52,8 +56,10 @@ public abstract class FireBaseController extends Controller {
         return content;
     }
 
+    //Used to request a configured RecyclerView.Adapter from child.
     abstract protected FirebaseRecyclerAdapter adapt();
 
+    //Used to request a per-Controller replacement ID for the identical RecyclerView.
     abstract protected @IdRes int getNewID();
 
     @Override
@@ -61,6 +67,8 @@ public abstract class FireBaseController extends Controller {
         super.onRestoreViewState(view, savedViewState);
     }
 
+    //Once the Controller is attached to the ViewPager and the rest of the view tree, configure
+    //number of columns according to width of screen.
     @Override
     protected void onAttach(@NonNull View view) {
         int measuredWidth = ((ViewGroup)view.getParent()).getMeasuredWidth();
@@ -76,6 +84,7 @@ public abstract class FireBaseController extends Controller {
         super.onAttach(view);
     }
 
+    //cleanup method
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -83,5 +92,6 @@ public abstract class FireBaseController extends Controller {
         mRef.onDisconnect();
     }
 
+    //Used to call the appropriate dialogue to add a new entry to a particular list.
     abstract public void adder();
 }

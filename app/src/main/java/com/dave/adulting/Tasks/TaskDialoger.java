@@ -24,6 +24,7 @@ import static java.util.Calendar.YEAR;
  * Created by Dave - Work on 5/19/2017.
  */
 
+//Static convenience class to display & handle a dialog to add a Task to Firebase
 public class TaskDialoger {
     public static void addDialog(final Context ctx, final DatabaseReference ref) {
         View diag = ((LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dialog_add_task, null);

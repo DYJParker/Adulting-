@@ -21,6 +21,7 @@ import java.util.GregorianCalendar;
  * Created by Dave - Work on 5/16/2017.
  */
 
+//Static convenience class to display & handle a dialog to add a Perishable to Firebase
 public class PerishableDialoger extends CommonObject {
     public static void addDialog(Context ctx, final DatabaseReference ref, @Nullable String title) {
         View diag = ((LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dialog_add_perishable, null);

@@ -21,6 +21,7 @@ public class PerishableController extends FireBaseController {
 
     public static final String KEY = "Perishables";
 
+    //Provides appropriately configured adapter back to super when super is setting up the RV.
     @Override
     protected FirebaseRecyclerAdapter adapt() {
         mRef = mRef.child(KEY);
@@ -36,11 +37,13 @@ public class PerishableController extends FireBaseController {
         };
     }
 
+    //Provides a /specific/ @IdRes to super, so the RV is specifically addressable for testing.
     @Override
     protected int getNewID() {
         return R.id.perishableRV;
     }
 
+    //sibling-common method to add an item to its respective list.
     @Override
     public void adder() {
         PerishableDialoger.addDialog(getActivity(),mRef,null);

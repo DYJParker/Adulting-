@@ -37,6 +37,8 @@ public abstract class CompletableVH extends RecyclerView.ViewHolder implements /
     protected FirebaseRecyclerAdapter mAdapter;
     private static final String TAG = "CompletableVH";
 
+    //parent constructor that takes an additional "R.id..." parameter, which is then inflated into
+    //the provided view's ViewStub, allowing uniform wrapping CardViews.
     public CompletableVH(View itemView, @LayoutRes int id) {
         super(itemView);
         ViewStub slot = ((ViewStub) itemView.findViewById(R.id.slot));
@@ -56,6 +58,8 @@ public abstract class CompletableVH extends RecyclerView.ViewHolder implements /
         mAdapter = adapter;
     }
 
+    //utility method to allow concrete ViewHolders to conveniently and discretionarily highlight
+    //views based on how close the represented item is to its deadline.
     protected void setCriticalityColor(String sDate, TextView... textViews) {
         Calendar cal = GregorianCalendar.getInstance();
         cal.add(Calendar.DAY_OF_YEAR, -1);

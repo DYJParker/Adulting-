@@ -28,12 +28,16 @@ import java.util.List;
  * Created by Dave - Work on 5/23/2017.
  */
 
+//Conductor Controller used to set up a Conductor-style ViewPager
 public class PagerController extends Controller {
     public static final int ADD_MENU_ID = 99;
     private ViewPager mViewPager;
     private TabLayout mTabs;
     private final RouterPagerAdapter mPager;
     private static final String TAG = "PagerController";
+
+    //I'm particularly proud of this! A constant array of the classes of Controllers I want in the
+    //ViewPager, so that I can create a page for each.
     private static final Class[] CONTROLLERS = new Class[]{
             PerishableController.class,
             ToBuyController.class,
@@ -61,6 +65,8 @@ public class PagerController extends Controller {
                 return CONTROLLERS.length;
             }
 
+            //Pulls the KEY used as a Firebase category name from each class, to be used as a caption
+            //On the respective TabLayout tab. Couldn't find a more elegant way to retrieve them.
             @Override
             public CharSequence getPageTitle(int position) {
                 String ret = null;
@@ -92,6 +98,7 @@ public class PagerController extends Controller {
         mTabs.setupWithViewPager(mViewPager, false);
     }
 
+    //Adds "add" MenuItem to parent activity's Menu.
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -100,6 +107,7 @@ public class PagerController extends Controller {
         mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
     }
 
+    //Intercept click on menu.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == ADD_MENU_ID) {
@@ -110,6 +118,8 @@ public class PagerController extends Controller {
         return super.onOptionsItemSelected(item);
     }
 
+    //Clean up ViewPager on Destroy, even if Activity is just changing configuration, so the
+    //RecyclerView can change its layout.
     @Override
     protected void onDestroyView(@NonNull View view) {
         mViewPager.setAdapter(null);

@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ToBuyController extends FireBaseController {
     public static final String KEY = "Shopping";
 
+    //Provides appropriately configured adapter back to super when super is setting up the RV.
     @Override
     protected FirebaseRecyclerAdapter adapt() {
         mRef = mRef.child(KEY);
@@ -34,11 +35,13 @@ public class ToBuyController extends FireBaseController {
         };
     }
 
+    //Provides a /specific/ @IdRes to super, so the RV is specifically addressable for testing.
     @Override
     protected int getNewID() {
         return R.id.shoppingRV;
     }
 
+    //sibling-common method to add an item to its respective list.
     @Override
     public void adder() {
         ToBuyDialoger.addDialog(getActivity(),mRef);

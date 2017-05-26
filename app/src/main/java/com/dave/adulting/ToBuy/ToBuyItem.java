@@ -6,6 +6,7 @@ import com.dave.adulting.CommonInfrastructure.CommonObject;
  * Created by Dave - Work on 5/16/2017.
  */
 
+//Boring POJO (BOJO??) to represent a Shopping item.
 public class ToBuyItem extends CommonObject {
     private String mTitle, mAdded;
 

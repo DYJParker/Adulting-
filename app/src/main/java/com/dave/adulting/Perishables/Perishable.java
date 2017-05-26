@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
  * Created by Dave - Work on 5/16/2017.
  */
 
+//Boring POJO (BOJO??) to represent a perishable item.
 public class Perishable extends CommonObject {
     private String mTitle, mExpires, mAdded;
 

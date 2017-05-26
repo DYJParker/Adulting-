@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class TasksController extends FireBaseController {
     public static final String KEY = "Tasks";
 
+    //Provides appropriately configured adapter back to super when super is setting up the RV.
     @Override
     protected FirebaseRecyclerAdapter adapt() {
         mRef = mRef.child(KEY);
@@ -34,11 +35,13 @@ public class TasksController extends FireBaseController {
         };
     }
 
+    //Provides a /specific/ @IdRes to super, so the RV is specifically addressable for testing.
     @Override
     protected int getNewID() {
         return R.id.tasksRV;
     }
 
+    //sibling-common method to add an item to its respective list.
     @Override
     public void adder() {
         TaskDialoger.addDialog(getActivity(),mRef);

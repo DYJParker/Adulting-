@@ -22,10 +22,12 @@ import java.util.GregorianCalendar;
  * Created by Dave - Work on 5/16/2017.
  */
 
+//VIewHolder for Perishable items.
 public class PerishableVH extends CompletableVH {
     private static final String TAG = "PerishableVH";
-    TextView mTitle, mLine1, mLine2;
+    private TextView mTitle, mLine1, mLine2;
 
+    //Pass desired child layout to super, retrieve ID references on construction,
     public PerishableVH(View itemView) {
         super(itemView, R.layout.three_line_list_item);
         mTitle = (TextView) itemView.findViewById(R.id.listTitle);
@@ -37,6 +39,7 @@ public class PerishableVH extends CompletableVH {
         mTitle.setText(title);
     }
 
+    //set highlight of first two lines of list item based on expiration date
     public void setLine1(String expires) {
         mLine1.setText(expires);
         setCriticalityColor(expires, mTitle, mLine1);
@@ -46,6 +49,9 @@ public class PerishableVH extends CompletableVH {
         mLine2.setText(added);
     }
 
+    //Set in super, this method adds the equivalent of the selected item to the Shopping list,
+    //announces that it's doing so, and offers the opportunity to remove the new Shopping item and
+    //reinstantiate the current Perishable (ie Undo).
     @Override
     public void onClick(View v) {
         final Perishable temp = ((Perishable) mAdapter.getItem(getAdapterPosition()));

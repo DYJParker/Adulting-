@@ -20,10 +20,13 @@ import java.util.Date;
  * Created by Dave - Work on 5/22/2017.
  */
 
+//ViewHolder for Shopping items.
 public class ToBuyVH extends CompletableVH {
     private TextView mTitle, mDate;
     private ImageButton mBuy, mRemove;
 
+    //Pass desired child layout to super, retrieve ID references on construction, sets listener for
+    //uniquely paired completion buttons.
     public ToBuyVH(View itemView) {
         super(itemView, R.layout.shopping_list_item);
         mTitle = (TextView) itemView.findViewById(R.id.listTitle);
@@ -35,6 +38,7 @@ public class ToBuyVH extends CompletableVH {
         mRemove.setOnClickListener(this);
     }
 
+    //Remove it from the list regardless, start a dialog to add it back to the Perishable list if appropriate.
     @Override
     public void onClick(View v) {
         if (v.getId() != R.id.cartRemove) {

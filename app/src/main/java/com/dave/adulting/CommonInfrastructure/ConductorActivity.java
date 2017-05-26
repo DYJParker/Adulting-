@@ -44,36 +44,7 @@ public class ConductorActivity extends AppCompatActivity {
     private ActivityOptions mOptions;
     private Router mRouter;
 
-    protected void onSpecificCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_conductor);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        float dpWidth = metrics.widthPixels / metrics.density;
-        if(dpWidth > LANDSCAPE_CRITERION * 2) {
-            ((AppBarLayout.LayoutParams) findViewById(R.id.conductorTabs).getLayoutParams())
-                    .setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL |
-                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS |
-                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP);
-        }
-        FireBaseController.setLandscapeCriterion(LANDSCAPE_CRITERION);
-
-        ViewGroup container = (ViewGroup) findViewById(R.id.conductorFrame);
-
-        mRouter = Conductor.attachRouter(this, container, savedInstanceState);
-        if (!mRouter.hasRootController()) {
-            mRouter.setRoot(RouterTransaction.with(new PagerController()));
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!mRouter.handleBack()) {
-            super.onBackPressed();
-        }
-    }
-
+    //If the user isn't authorized, makes them authorize; otherwise, continues on to normal initialization.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +63,45 @@ public class ConductorActivity extends AppCompatActivity {
         }
     }
 
+    //Conventional initialization, in separate method for timing.
+    //Was originally an abstract method, when I had multiple activities.
+    protected void onSpecificCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_conductor);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //this chunk of code sets the TabLayout (but not the App Bar!) to hide on scroll
+        //if it's in landscape mode, and then propagates the criterion downstream.
+
+        //Maybe change this to be based on screen height, since this will also trigger on a tablet,
+        //where you would have plenty of space.
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float dpWidth = metrics.widthPixels / metrics.density;
+        if(dpWidth > LANDSCAPE_CRITERION * 2) {
+            ((AppBarLayout.LayoutParams) findViewById(R.id.conductorTabs).getLayoutParams())
+                    .setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL |
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS |
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP);
+        }
+        FireBaseController.setLandscapeCriterion(LANDSCAPE_CRITERION);
+
+        ViewGroup container = (ViewGroup) findViewById(R.id.conductorFrame);
+
+        mRouter = Conductor.attachRouter(this, container, savedInstanceState);
+        if (!mRouter.hasRootController()) {
+            mRouter.setRoot(RouterTransaction.with(new PagerController()));
+        }
+    }
+
+    //attempts to send the back-press to the Conductor Router, and sends it back if it's declined.
+    @Override
+    public void onBackPressed() {
+        if (!mRouter.handleBack()) {
+            super.onBackPressed();
+        }
+    }
+
+    //for processing result from Firebase signin.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -104,6 +114,7 @@ public class ConductorActivity extends AppCompatActivity {
         }
     }
 
+    //utility method for errored firebase logins
     protected void signInError(IdpResponse response) {
         String error;
         if (response == null) error = "You pressed the back button";
@@ -128,10 +139,7 @@ public class ConductorActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            return true;
-        } else*/ if (id == R.id.action_signout) {
+        if (id == R.id.action_signout) {
             final AppCompatActivity ctx = this;
             AuthUI.getInstance()
                     .signOut(ctx)
